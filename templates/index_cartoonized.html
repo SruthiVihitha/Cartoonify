@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173468417-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-173468417-1');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Niraj_pandkar">
+    <meta name="twitter:title" content="Cartoonized your world!">
+    <meta name="twitter:description" content="Want to see your cartoonized self? You can try image or video.">
+    <meta name="twitter:creator" content="@Niraj_pandkar">
+    <meta name="twitter:image" content="static/sample_images/twitter_image.png">
+    <meta name="twitter:domain" content="https://cartoonize-lkqov62dia-de.a.run.app/cartoonize">
+
+    <title>Cartoonizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <style>
+        html {
+        box-sizing: border-box;
+        }
+        *, *:before, *:after {
+        box-sizing: inherit;
+        }
+        body {
+    background-image: url('static/homeimg.jpeg');
+    background-size:fill;  /* Optional: Makes sure the image covers the entire background */
+    background-position: center; /* Optional: Centers the image */
+}
+.r1 {
+  background-color: #130e0e; 
+  padding: 10px 10px;
+  margin: 40px auto;
+  max-width: 700px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: aliceblue;
+}
+
+        .ui.menu {
+            background-color: #120e0e;
+            height: 10%;
+            margin: 0;
+            border-radius: 0;
+        }
+        .hh {
+            color:rgb(255, 255, 255);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 39px;
+    margin-top: 30px; 
+    margin-left: 10px;
+}
+#doodleBtn{
+    
+   background-color: rgb(22, 16, 16);
+   margin-left: 15px;
+}
+.hh1{
+    color:black
+}
+#uploadimage{
+    color:#ffffff ;
+    background-color:  #160f0f;
+}
+        iframe[src*=youtube] {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 100%;
+                    padding-bottom: 10px;
+                }
+                .b1{
+                    color: #ffffff;
+                    background-color:  #0c0a0a;
+                    padding: 10px 8px;
+                    border: none;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+                      /* Add for filtered image */
+
+
+/* Makes sure images don't overflow */
+/*img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+*/
+/* Makes the filtered image section stand out *//*
+.center.aligned.column {
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+   */ /* Force the image container to be visible *//*
+#filteredImage {
+    min-height: 100px;
+    background: #f5f5f5 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="%23ddd" stroke-width="2"><rect x="1" y="1" width="98" height="98"/><path d="M1 1L99 99M1 99L99 1"/></svg>') center/30px 30px;
+}
+*/
+/* Visual feedback for loading *//*
+.img-loading {
+    filter: blur(5px);
+    opacity: 0.8;
+}
+     */ 
+     
+     /* images boxex*/
+     .sample-images-container {
+        margin: 2rem 0;
+        color: #000000;
+    }
+    
+    .image-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    
+    .image-column {
+        width: 46%;
+        margin: 0 2%;
+        background: rgb(36, 36, 36);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 350px; /* Fixed height for all containers */
+        overflow: hidden; /* Ensures images don't overflow container */
+    }
+    
+    .sample-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Maintains aspect ratio while filling container */
+        border: 1px solid #fffefe;
+        border-radius: 4px;
+        transition: transform 0.3s ease;
+    }
+    
+    .sample-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .image-row {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-column {
+            width: 90%;
+            margin-bottom: 1.5rem;
+            height: 300px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="ui menu">
+        <div class="hh">
+            Cartoonify
+        </div>
+    </div>
+        <div id="loader" class="ui disabled dimmer">
+                <div class="ui text loader">Preparing your cartoon! May take an extra few seconds for video :</div>
+              </div>
+
+
+<div class='ui padded centered grid'>
+    <!-- Messaging system -->
+    <div class="row">
+        <div class="center aligned column">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div style="height:10%; display:flex; align-items: center; justify-content: center">
+                        {% for category, message in messages %}
+                            {% if category == error%}
+                                <h3 style="color:red">{{ message }}</h3>
+                            {% else %}
+                                <h3 style="color:green">{{ message }}</h3>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    
+
+    <!-- Heading of the page -->
+    <div class="r1">
+        <div class='center aligned column'>
+            <h1>Get your Cartoonized Photo Now!!</h1>
+        </div>
+    </div>
+    
+    <!-- Submission form -->
+    <div class="row">
+        <div class='center aligned column'>
+            <form id='formsubmit' method="post" action="cartoonize" enctype = "multipart/form-data">
+    
+                <div class="ui buttons">
+                    <div id='uploadimage' class="ui button" style="align-items: center;">
+                        <i class="image icon"></i>
+                        Upload Photo
+                    </div>   
+                </div>
+                <input type='file' id='hiddeninputfile' accept="image/*" name = 'image' style="display: none"/>
+                <input type="file" id="hiddeninputvideo" accept="video/*" name = 'video' style="display: none">
+                <!-- <input id='submitbutton' class='ui button' type='submit'/> -->
+            </form>
+        </div>
+    </div>
+    {%if cartoonized_image %}
+    <div class="row">
+        <div class="column">
+            <!-- Nested grid -->
+            <div class="ui centered grid">
+                <div class="row">
+                    <div class="center aligned column">
+                        {%if cartoonized_image%}
+                        <div class="ui centered card">
+                            <div class="image">
+                                <img id="cartoonImg" src="{{ cartoonized_image }}">
+                            </div>
+                        </div>
+                        {%endif%}
+                        <!-- Add this right after the main cartoonized image display section -->
+                 <!-- Add this right after your main image display section -->
+                 {% if filtered_image %}
+                 <div class="row" style="margin-top: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;">
+                     <div class="center aligned column">
+                         <h3 style="color: white;">Your Filtered Image</h3>
+                         
+                         <!-- Image with multiple fallbacks -->
+                         <div style="background: white; padding: 10px; border-radius: 8px; max-width: 500px; margin: 0 auto;">
+                             <img id="filteredImage" 
+                                  src="{{ filtered_image }}" 
+                                  style="max-width: 100%; display: block; border: 1px solid #ddd;"
+                                  onload="this.style.opacity=1"
+                                  onerror="this.parentNode.innerHTML='<p style=\'color:red\'>Image failed to load. <a href=\'{{ filtered_image }}\' target=\'_blank\'>Open directly</a></p>'">
+                         </div>
+                         
+                         <!-- Download button -->
+                         <div style="margin-top: 15px;">
+                             <a href="{{ filtered_image }}" download class="ui button" style="background: #ba3b3b; color: white;">
+                                 <i class="download icon"></i> Download
+                             </a>
+                             <button onclick="window.location.reload()" class="ui button">
+                                 <i class="refresh icon"></i> Reload Image
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+                 
+                 <script>
+                 // Force image reload if needed
+                 document.addEventListener('DOMContentLoaded', function() {
+                     const img = document.getElementById('filteredImage');
+                     if(img) {
+                         // Add cache-buster if image fails to load
+                         img.onerror = function() {
+                             this.src = this.src.split('?')[0] + '?force=' + Date.now();
+                         };
+                         
+                         // If no image after 2 seconds, try reloading
+                         setTimeout(() => {
+                             if(img.naturalWidth === 0) {
+                                 img.src = img.src + (img.src.includes('?') ? '&' : '?' + 'retry=' + Date.now());
+                             }
+                         }, 2000);
+                     }
+                 });
+                 </script>
+                 {% endif %}
+                </div>
+        </div>
+    <div class="row">
+                  
+                    {% if cartoonized_image %}
+                    <script>
+                        window.addEventListener('load', function () {
+                            setTimeout(function () {
+                                alert("Your cartoonized image is ready! It is valid for download for 5 minutes only.");
+                            }, 500); // Delay for smoother appearance
+                        });
+                    </script>
+                
+                    <a class="hh1" href="{{ cartoonized_image }}" download>
+                        <button class="b1">
+                            <i class="download icon"></i>
+                            Download
+                        </button>
+                    </a>
+                {% endif %}
+                {% if cartoonized_image %}
+    <input type="hidden" id="originalImagePath" value="{{ original_image }}">
+    <button id="doodleBtn" class="ui orange button">
+        <i class="paint brush icon"></i>
+        Doodle
+    </button>
+    <button id="applyFiltersBtn" class="ui teal button">
+        <i class="magic icon"></i>
+        Apply Filters
+    </button>
+    <div id="filterOptions" style="display: none; margin-top: 10px;">
+        <button id="oilPaintingBtn" class="ui orange button">Oil Painting</button>
+        <button id="pencilSketchBtn" class="ui grey button">Pencil Sketch</button>
+    </div>
+{% endif %}
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+    <div class="sample-images-container">
+        <!-- Sample Images -->
+        <div class="image-row">
+            <div class="image-column">
+                <img class="sample-image" src="static/uploads/filtered_78e4c11860b444a8bba3d47ce4f996b2.jpg" alt="Sample 1">
+            </div>
+            <div class="image-column">
+                <img class="sample-image" src="static/uploads/filtered_f96ce81858324cf1a8ed18abefb18a45.jpg" alt="Cartoonized 1">
+            </div>
+        </div>
+        
+        <div class="image-row">
+            <div class="image-column">
+                <img class="sample-image" src="static/uploads/filtered_045208a97d4f4aa89d616f66d77b958b.jpg" alt="Sample 2">
+            </div>
+            <div class="image-column">
+                <img class="sample-image" src="static/uploads/filtered_18f3d60794d8415bae822c574d1f02b5.jpg" alt="Cartoonized 2">
+            </div>
+        </div>
+        
+        <div class="image-row">
+            <div class="image-column">
+                <img class="sample-image" src="static/sample_images/WhatsApp Image 2025-04-13 at 15.46.00.jpeg" alt="Sample 3">
+            </div>
+            <div class="image-column">
+                <img class="sample-image" src="static/cartoonized_images/4931b879-abbf-4e9e-a42f-42e440298939.jpg" alt="Cartoonized 3">
+            </div>
+        </div>
+    </div>
+
+<div id="doodleContainer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
+    <div style="position:absolute; top:10px; left:10px; background:white; padding:10px; border-radius:6px; z-index:10000;">
+        <button class="ui red button" onclick="clearCanvas()">Clear</button>
+        <input type="color" id="colorPicker" value="#ff0000">
+        <button class="ui green button" onclick="closeDoodle()">Done</button>
+        <button class="ui blue button" onclick="downloadCanvas()">Download</button>
+        <button class="ui grey button" onclick="toggleEraser()">Eraser</button>
+        <button class="ui black button" onclick="enableDraw()">Draw</button>
+        <button class="ui yellow button" onclick="zoomIn()">Zoom In</button>
+        <button class="ui orange button" onclick="zoomOut()">Zoom Out</button>
+        <button class="ui teal button" onclick="undo()">Undo</button>
+        <button class="ui violet button" onclick="redo()">Redo</button>
+    </div>
+
+    <!-- Centering container -->
+    <div id="canvasWrapper" style="
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    ">
+        <!-- Background canvas for the image -->
+        <canvas id="imageCanvas" style="position: absolute; z-index: 1;"></canvas>
+
+        <!-- Top transparent canvas for doodles -->
+        <canvas id="doodleCanvas" style="position: absolute; z-index: 2; cursor: crosshair;"></canvas>
+    </div>
+</div>
+
+<script>
+    $('.ui.accordion')
+  .accordion()
+;
+    $("#uploadimage").on("click", function() {
+        $('#hiddeninputfile').click(); 
+    });
+
+    $("#uploadvideo").on("click", function() {
+        $('#hiddeninputvideo').click(); 
+    });
+
+    document.getElementById("hiddeninputfile").onchange = function() {
+        $('#loader').removeClass('disabled').addClass('active');
+        document.getElementById("formsubmit").submit();
+        
+    };
+    document.getElementById("hiddeninputvideo").onchange = function() {
+        const fi = document.getElementById('hiddeninputvideo'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file.
+                //Change the max_file_size as per your need 
+                const max_file_size = 30720;
+                if (file >= max_file_size) { 
+                    alert( 
+                      "File too Big, please select a file less than 30mb (10 sec at 1080p or 5 sec at 4k)"); 
+                } else { 
+                    $('#loader').removeClass('disabled').addClass('active');
+                    document.getElementById("formsubmit").submit();
+                } 
+            } 
+        } 
+        
+        
+    };
+    var recorder = document.getElementById('recorder');
+    //start i added
+    document.addEventListener("DOMContentLoaded", () => {
+    const doodleBtn = document.getElementById("doodleBtn");
+    const doodleContainer = document.getElementById("doodleContainer");
+    const canvas = document.getElementById("doodleCanvas");
+    const bgCanvas = document.getElementById("imageCanvas");
+    const ctx = canvas.getContext("2d");
+    const bgCtx = bgCanvas.getContext("2d");
+    const colorPicker = document.getElementById("colorPicker");
+
+    let drawing = false;
+    let isErasing = false;
+    let scale = 1.0;
+    const scaleStep = 0.1;
+
+    let undoStack = [];
+    let redoStack = [];
+
+    if (doodleBtn) {
+        doodleBtn.addEventListener("click", () => {
+            const cartoonImg = document.getElementById("cartoonImg");
+
+            if (!cartoonImg) {
+                alert("Image not found!");
+                return;
+            }
+
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = cartoonImg.src;
+
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                bgCanvas.width = img.width;
+                bgCanvas.height = img.height;
+
+                bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+                bgCtx.drawImage(img, 0, 0);
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                doodleContainer.style.display = "block";
+
+                scale = 1.0;
+                applyZoom();
+                saveState(); // initial state
+            };
+        });
+    }
+
+    canvas.addEventListener("mousedown", (e) => {
+        drawing = true;
+        const { x, y } = getCoords(e);
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        if (drawing) saveState();
+        drawing = false;
+    });
+
+    canvas.addEventListener("mouseout", () => {
+        drawing = false;
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+
+        const { x, y } = getCoords(e);
+        ctx.lineWidth = 4;
+        ctx.lineCap = "round";
+
+        if (isErasing) {
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.strokeStyle = "rgba(0,0,0,1)";
+        } else {
+            ctx.globalCompositeOperation = "source-over";
+            ctx.strokeStyle = colorPicker.value;
+        }
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    });
+
+    function getCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: (e.clientX - rect.left) * (canvas.width / rect.width),
+            y: (e.clientY - rect.top) * (canvas.height / rect.height),
+        };
+    }
+
+    // Global functions
+    window.clearCanvas = function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        saveState();
+    };
+
+    window.closeDoodle = function () {
+        doodleContainer.style.display = "none";
+    };
+
+    window.downloadCanvas = function () {
+        const merged = document.createElement("canvas");
+        merged.width = canvas.width;
+        merged.height = canvas.height;
+
+        const mergedCtx = merged.getContext("2d");
+        mergedCtx.drawImage(bgCanvas, 0, 0);
+        mergedCtx.drawImage(canvas, 0, 0);
+
+        const link = document.createElement("a");
+        link.download = "doodled_image.png";
+        link.href = merged.toDataURL("image/png");
+        link.click();
+    };
+
+    window.toggleEraser = function () {
+        isErasing = !isErasing;
+    };
+
+    window.enableDraw = function () {
+        isErasing = false;
+    };
+
+    // Zoom functions
+    window.zoomIn = function () {
+        scale += scaleStep;
+        applyZoom();
+    };
+
+    window.zoomOut = function () {
+        scale = Math.max(scaleStep, scale - scaleStep);
+        applyZoom();
+    };
+
+    function applyZoom() {
+        const wrapper = document.getElementById("canvasWrapper");
+        wrapper.style.transform = `scale(${scale})`;
+        wrapper.style.transformOrigin = "center center";
+    }
+
+    // Undo/Redo stack
+    function saveState() {
+        if (undoStack.length >= 50) undoStack.shift(); // Limit memory
+        undoStack.push(canvas.toDataURL());
+        redoStack = []; // Clear redo stack
+    }
+
+    window.undo = function () {
+        if (undoStack.length > 1) {
+            redoStack.push(undoStack.pop());
+            const previous = undoStack[undoStack.length - 1];
+            restoreFromDataUrl(previous);
+        }
+    };
+
+    window.redo = function () {
+        if (redoStack.length > 0) {
+            const next = redoStack.pop();
+            undoStack.push(next);
+            restoreFromDataUrl(next);
+        }
+    };
+
+    function restoreFromDataUrl(dataUrl) {
+        const img = new Image();
+        img.src = dataUrl;
+        img.onload = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+});
+//filters
+document.addEventListener("DOMContentLoaded", function() {
+    var applyFiltersBtn = document.getElementById('applyFiltersBtn');
+    var filterOptions = document.getElementById('filterOptions');
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', function() {
+            filterOptions.style.display = filterOptions.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+
+    function applyFilter(filterType) {
+    const originalPath = document.getElementById('originalImagePath').value;
+    
+    fetch('/apply_filter', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `filter_type=${filterType}&original_image_path=${encodeURIComponent(originalPath)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            // Force reload with new image
+            window.location.href = `/cartoonize?filtered_image=/uploads/${data.filtered_url.split('/').pop()}&t=${Date.now()}`;
+        } else {
+            alert('Error: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to apply filter. Please try again.');
+    });
+}
+
+    var oilBtn = document.getElementById('oilPaintingBtn');
+    var sketchBtn = document.getElementById('pencilSketchBtn');
+    if (oilBtn) oilBtn.addEventListener('click', function() { applyFilter('oil_painting'); });
+    if (sketchBtn) sketchBtn.addEventListener('click', function() { applyFilter('pencil_sketch'); });
+});
+
+
+</script>
+</body>
+</html>
