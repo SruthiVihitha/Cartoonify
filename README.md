@@ -27,3 +27,5 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
+<img width="1414" height="529" alt="image" src="https://github.com/user-attachments/assets/e9e5ea12-9a6c-4d64-aa9c-c6dfb0498e55" />
+
